@@ -1,0 +1,11 @@
+.layout {
+  height: 100vh;
+  background: #202020;
+  .data {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    grid-gap: 6rem;
+  }
+}

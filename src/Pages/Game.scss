@@ -1,0 +1,70 @@
+.points_black {
+  border-radius: 1rem;
+  padding: 16px;
+  color: #fff;
+  background: #000;
+  font-size: 21px;
+  font-weight: bold;
+  text-decoration-line: underline;
+}
+.points_white {
+  border-radius: 1rem;
+  padding: 16px;
+  color: #000;
+  background: #fff;
+  font-size: 21px;
+  font-weight: bold;
+  text-decoration-line: underline;
+}
+
+.game_place {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  background-image: url('../assets/board.jpg');
+  .row {
+    display: flex;
+    align-items: center;
+
+    .board_box {
+      height: 5rem;
+      width: 5rem;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      .white_chekser {
+        height: 3rem;
+        width: 3rem;
+        border-radius: 6rem;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .black_chekser {
+        height: 3rem;
+        width: 3rem;
+        background: #000;
+        border-radius: 6rem;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+    .board_box_numbers {
+      border: none;
+      color: #fff;
+    }
+    .board_box_alfabeth {
+      border: none;
+      color: #fff;
+    }
+    .board_box_article {
+      border: none;
+      color: #202020;
+    }
+  }
+}

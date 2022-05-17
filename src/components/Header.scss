@@ -1,0 +1,17 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 4rem;
+  background: #0f0f0f;
+  color: #fff;
+  button {
+    background: #95959526;
+    color: #fff;
+    border-radius: 1rem;
+    width: 5rem;
+  }
+  h1 {
+    padding: 0;
+    margin: 0;
+  }
+}
