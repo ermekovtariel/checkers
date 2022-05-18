@@ -1,4 +1,4 @@
-.points_black {
+.points {
   border-radius: 1rem;
   padding: 16px;
   color: #fff;
@@ -7,22 +7,22 @@
   font-weight: bold;
   text-decoration-line: underline;
 }
-.points_white {
-  border-radius: 1rem;
-  padding: 16px;
-  color: #000;
-  background: #fff;
-  font-size: 21px;
-  font-weight: bold;
-  text-decoration-line: underline;
-}
+// .points_white {
+//   border-radius: 1rem;
+//   padding: 16px;
+//   color: #000;
+//   background: #fff;
+//   font-size: 21px;
+//   font-weight: bold;
+//   text-decoration-line: underline;
+// }
 
 .game_place {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  background-image: url('../assets/board.jpg');
+  background-image: url('../assets/img/board.jpg');
   .row {
     display: flex;
     align-items: center;
@@ -44,10 +44,16 @@
         font-weight: bold;
         font-size: 18px;
       }
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+
       .black_chekser {
         height: 3rem;
         width: 3rem;
-        background: #000;
+        background: #5c5c5c;
         border-radius: 6rem;
         color: #fff;
         font-weight: bold;
