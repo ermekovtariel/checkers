@@ -1,6 +1,7 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable array-callback-return */
 import React from 'react';
-import { alfabeth, numbers } from '../configs';
+import { alfabeth, board, numbers } from '../configs';
 import { BlackChecker, WhiteChecker } from '../assets/png';
 
 function Board({
@@ -11,9 +12,26 @@ function Board({
   chackers,
   setWCheksers,
   setBCheksers,
+  setwCollection,
+  setbCollection,
+  wCollection,
+  bCollection,
+  // clonedArray,
   // setBoardData,
 }) {
+  // React.useEffect(() => {
+  //   newBoard.map((row) => {
+  //     row.map((cell) => {
+  //       if (cell.item) {
+  //         cell.item = null;
+  //       }
+  //     });
+  //   });
+  // }, [whiteCheksers, blackCheksers]);
+
   function changePlace(place) {
+    // let clonedArray = JSON.parse(JSON.stringify(board));
+    // const clonedArray = board.map((a) => ({ ...a }));
     console.log(place);
     let newWhiteCheksers = [];
     let newBlackCheksers = [];
@@ -45,17 +63,100 @@ function Board({
                       chackerObj.y = place.y;
                       chackerObj.id = oldchacker.id;
                       chackerObj.group = oldchacker.group;
-
                       newWhiteCheksers.push(chackerObj);
                     } else {
                       chackerObj = oldchacker;
                       newWhiteCheksers.push(chackerObj);
                     }
                     // !
+                  } else if (
+                    place.y - 2 === chackers.y ||
+                    place.y + 2 === chackers.y
+                  ) {
+                    // ////////////////////////////////////////////
+                    if (board[rowIdx + 1][cellIdx + 1].item) {
+                      setwCollection([
+                        ...wCollection,
+                        boardData[rowIdx + 1][cellIdx + 1].item,
+                      ]);
+
+                      let array = blackCheksers;
+                      let indexa = array.indexOf(
+                        boardData[rowIdx + 1][cellIdx + 1].item
+                      );
+
+                      delete array[indexa];
+
+                      console.log(1);
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
+                      newWhiteCheksers.push(chackerObj);
+                    } else if (board[rowIdx + 1][cellIdx - 1].item) {
+                      setwCollection([
+                        ...wCollection,
+                        boardData[rowIdx + 1][cellIdx - 1].item,
+                      ]);
+                      let array = blackCheksers;
+                      let indexa = array.indexOf(
+                        boardData[rowIdx + 1][cellIdx - 1].item
+                      );
+
+                      delete array[indexa];
+
+                      console.log(1);
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
+                      newWhiteCheksers.push(chackerObj);
+                    } else if (board[rowIdx - 1][cellIdx - 1].item) {
+                      setwCollection([
+                        ...wCollection,
+                        boardData[rowIdx - 1][cellIdx - 1].item,
+                      ]);
+
+                      let array = blackCheksers;
+                      let indexa = array.indexOf(
+                        boardData[rowIdx - 1][cellIdx - 1].item
+                      );
+
+                      delete blackCheksers[indexa];
+
+                      console.log(1);
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
+                      newWhiteCheksers.push(chackerObj);
+                    } else if (board[rowIdx - 1][cellIdx + 1].item) {
+                      setwCollection([
+                        ...wCollection,
+                        boardData[rowIdx - 1][cellIdx + 1].item,
+                      ]);
+                      let array = blackCheksers;
+                      let indexa = array.indexOf(
+                        boardData[rowIdx - 1][cellIdx + 1].item
+                      );
+
+                      delete array[indexa];
+
+                      console.log(1);
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
+                      newWhiteCheksers.push(chackerObj);
+                    } else {
+                      chackerObj = oldchacker;
+                      newWhiteCheksers.push(chackerObj);
+                    }
                   } else {
                     chackerObj = oldchacker;
                     newWhiteCheksers.push(chackerObj);
                   }
+                  // !
                 } else {
                   chackerObj.x = place.x;
                   chackerObj.y = place.y;
@@ -70,13 +171,13 @@ function Board({
               }
             }
           });
-
           blackCheksers.map((oldchacker) => {
             let chackerObj = {};
             if (chackers && place.item === null) {
               if (chackers.id === oldchacker.id) {
                 if (!chackers.q) {
                   if (numbers[rowIdx] + 1 === chackers.y) {
+                    // !
                     if (
                       chackers.x + 1 === place.x ||
                       chackers.x - 1 === place.x
@@ -90,17 +191,83 @@ function Board({
                       chackerObj = oldchacker;
                       newBlackCheksers.push(chackerObj);
                     }
+                    // !
+                  } else if (
+                    place.y - 2 === chackers.y ||
+                    place.y + 2 === chackers.y
+                  ) {
+                    // ////////////////////////////////////////////
+                    // let f=board
+                    // let s=board[rowIdx + 1][cellIdx + 1].item
+                    if (
+                      // board[rowIdx + 1][cellIdx - 1].item ||
+                      board[rowIdx + 1][cellIdx + 1].item
+                    ) {
+                      setbCollection([
+                        ...bCollection,
+                        boardData[rowIdx + 1][cellIdx + 1].item,
+                      ]);
+                      // newBlackCheksers;
+                      var removeIndex = newWhiteCheksers
+                        .map(function (item) {
+                          return item.id;
+                        })
+                        .indexOf();
+
+                      console.log('removeIndex', removeIndex);
+
+                      // remove object
+                      newBlackCheksers.splice(removeIndex, 1);
+                      // setBCheksers(
+                      //   blackCheksers.map((chekser) => {
+                      //     if (
+                      //       chekser !== boardData[rowIdx + 1][cellIdx + 1].item
+                      //     ) {
+                      //       return chekser;
+                      //     }
+                      //   })
+                      // );
+                      // let clonedArray = JSON.parse(JSON.stringify(board));
+
+                      // console.log([
+                      //   ...wCollection,
+                      //   clonedArray[rowIdx + 1][cellIdx + 1].item,
+                      // ]);
+
+                      console.log(1);
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
+                      newBlackCheksers.push(chackerObj);
+                    } else if (board[rowIdx + 1][cellIdx - 1].item) {
+                      setbCollection([
+                        ...bCollection,
+                        boardData[rowIdx + 1][cellIdx - 1].item,
+                      ]);
+
+                      console.log(1);
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
+                      newBlackCheksers.push(chackerObj);
+                    } else {
+                      chackerObj = oldchacker;
+                      newBlackCheksers.push(chackerObj);
+                    }
                   } else {
                     chackerObj = oldchacker;
                     newBlackCheksers.push(chackerObj);
                   }
+                  // !
                 } else {
                   chackerObj.x = place.x;
                   chackerObj.y = place.y;
                   chackerObj.id = oldchacker.id;
                   chackerObj.group = oldchacker.group;
 
-                  newWhiteCheksers.push(chackerObj);
+                  newBlackCheksers.push(chackerObj);
                 }
               } else {
                 chackerObj = oldchacker;
@@ -108,6 +275,101 @@ function Board({
               }
             }
           });
+          ////////////////////////////////////////////////////////////////////
+          // blackCheksers.map((oldchacker) => {
+          //   let chackerObj = {};
+          //   if (chackers && place.item === null) {
+          //     if (chackers.id === oldchacker.id) {
+          //       if (!chackers.q) {
+          //         if (numbers[rowIdx] + 1 === chackers.y) {
+          //           // !
+          //           if (
+          //             chackers.x + 1 === place.x ||
+          //             chackers.x - 1 === place.x
+          //           ) {
+          //             chackerObj.x = place.x;
+          //             chackerObj.y = place.y;
+          //             chackerObj.id = oldchacker.id;
+          //             chackerObj.group = oldchacker.group;
+
+          //             newBlackCheksers.push(chackerObj);
+          //           } else {
+          //             chackerObj = oldchacker;
+          //             newBlackCheksers.push(chackerObj);
+          //           }
+          //           // !
+          //         } else if (
+          //           (chackers.x + 2 === place.x &&
+          //             numbers[rowIdx] === chackers.y &&
+          //             boardData[rowIdx][cellIdx].item) ||
+          //           (chackers.x - 2 === place.x &&
+          //             numbers[rowIdx] === place.y &&
+          //             boardData[rowIdx][cellIdx].item)
+          //         ) {
+          //           chackerObj.x = place.x;
+          //           chackerObj.y = place.y;
+          //           chackerObj.id = oldchacker.id;
+          //           chackerObj.group = oldchacker.group;
+
+          //           newBlackCheksers.push(chackerObj);
+          //           // ! setwCollection(boardData[rowIdx][cellIdx].item);
+          //         } else {
+          //           chackerObj = oldchacker;
+          //           newBlackCheksers.push(chackerObj);
+          //         }
+          //         // !
+          //       } else {
+          //         chackerObj.x = place.x;
+          //         chackerObj.y = place.y;
+          //         chackerObj.id = oldchacker.id;
+          //         chackerObj.group = oldchacker.group;
+
+          //         newBlackCheksers.push(chackerObj);
+          //       }
+          //     } else {
+          //       chackerObj = oldchacker;
+          //       newBlackCheksers.push(chackerObj);
+          //     }
+          //   }
+          // });
+
+          // blackCheksers.map((oldchacker) => {
+          //   let chackerObj = {};
+          //   if (chackers && place.item === null) {
+          //     if (chackers.id === oldchacker.id) {
+          //       if (!chackers.q) {
+          //         if (numbers[rowIdx] + 1 === chackers.y) {
+          //           if (
+          //             chackers.x + 1 === place.x ||
+          //             chackers.x - 1 === place.x
+          //           ) {
+          //             chackerObj.x = place.x;
+          //             chackerObj.y = place.y;
+          //             chackerObj.id = oldchacker.id;
+          //             chackerObj.group = oldchacker.group;
+          //             newBlackCheksers.push(chackerObj);
+          //           } else {
+          //             chackerObj = oldchacker;
+          //             newBlackCheksers.push(chackerObj);
+          //           }
+          //         } else {
+          //           chackerObj = oldchacker;
+          //           newBlackCheksers.push(chackerObj);
+          //         }
+          //       } else {
+          //         chackerObj.x = place.x;
+          //         chackerObj.y = place.y;
+          //         chackerObj.id = oldchacker.id;
+          //         chackerObj.group = oldchacker.group;
+
+          //         newWhiteCheksers.push(chackerObj);
+          //       }
+          //     } else {
+          //       chackerObj = oldchacker;
+          //       newBlackCheksers.push(chackerObj);
+          //     }
+          //   }
+          // });
           s.push(obj);
         } else {
           s.push(boardPlace);
@@ -128,7 +390,7 @@ function Board({
           <div className='row' key={idx}>
             <div
               key={`${numbers[idx]}_${idx}`}
-              className='board_box board_box_numbers'
+              className='board_box board_box_numbers '
               style={{
                 borderRight: '1px solid #fff',
                 borderTopRightRadius: '0',
