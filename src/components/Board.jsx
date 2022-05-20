@@ -15,8 +15,6 @@ function Board({
 }) {
   function changePlace(place) {
     console.log(place);
-    // setTime(!time);
-    // let f = [];
     let newWhiteCheksers = [];
     let newBlackCheksers = [];
     boardData.map((boardPlace, rowIdx) => {
@@ -36,25 +34,34 @@ function Board({
             let chackerObj = {};
             if (chackers && place.item === null) {
               if (chackers.id === oldchacker.id) {
-                if (numbers[rowIdx] - 1 === chackers.y) {
-                  // !
-                  if (
-                    chackers.x + 1 === place.x ||
-                    chackers.x - 1 === place.x
-                  ) {
-                    chackerObj.x = place.x;
-                    chackerObj.y = place.y;
-                    chackerObj.id = oldchacker.id;
-                    chackerObj.group = oldchacker.group;
+                if (!chackers.q) {
+                  if (numbers[rowIdx] - 1 === chackers.y) {
+                    // !
+                    if (
+                      chackers.x + 1 === place.x ||
+                      chackers.x - 1 === place.x
+                    ) {
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
 
-                    newWhiteCheksers.push(chackerObj);
+                      newWhiteCheksers.push(chackerObj);
+                    } else {
+                      chackerObj = oldchacker;
+                      newWhiteCheksers.push(chackerObj);
+                    }
+                    // !
                   } else {
                     chackerObj = oldchacker;
                     newWhiteCheksers.push(chackerObj);
                   }
-                  // !
                 } else {
-                  chackerObj = oldchacker;
+                  chackerObj.x = place.x;
+                  chackerObj.y = place.y;
+                  chackerObj.id = oldchacker.id;
+                  chackerObj.group = oldchacker.group;
+
                   newWhiteCheksers.push(chackerObj);
                 }
               } else {
@@ -68,23 +75,32 @@ function Board({
             let chackerObj = {};
             if (chackers && place.item === null) {
               if (chackers.id === oldchacker.id) {
-                if (numbers[rowIdx] + 1 === chackers.y) {
-                  if (
-                    chackers.x + 1 === place.x ||
-                    chackers.x - 1 === place.x
-                  ) {
-                    chackerObj.x = place.x;
-                    chackerObj.y = place.y;
-                    chackerObj.id = oldchacker.id;
-                    chackerObj.group = oldchacker.group;
-                    newBlackCheksers.push(chackerObj);
+                if (!chackers.q) {
+                  if (numbers[rowIdx] + 1 === chackers.y) {
+                    if (
+                      chackers.x + 1 === place.x ||
+                      chackers.x - 1 === place.x
+                    ) {
+                      chackerObj.x = place.x;
+                      chackerObj.y = place.y;
+                      chackerObj.id = oldchacker.id;
+                      chackerObj.group = oldchacker.group;
+                      newBlackCheksers.push(chackerObj);
+                    } else {
+                      chackerObj = oldchacker;
+                      newBlackCheksers.push(chackerObj);
+                    }
                   } else {
                     chackerObj = oldchacker;
                     newBlackCheksers.push(chackerObj);
                   }
                 } else {
-                  chackerObj = oldchacker;
-                  newBlackCheksers.push(chackerObj);
+                  chackerObj.x = place.x;
+                  chackerObj.y = place.y;
+                  chackerObj.id = oldchacker.id;
+                  chackerObj.group = oldchacker.group;
+
+                  newWhiteCheksers.push(chackerObj);
                 }
               } else {
                 chackerObj = oldchacker;

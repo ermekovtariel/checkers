@@ -1,36 +1,40 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 import React from 'react';
 import { Board } from '../components';
-import { bCheksers, board as boardData, wCheksers } from '../configs';
+import { bCheksers, board, newBoard, wCheksers } from '../configs';
 import { Layout } from '../Layout';
 
 import './Game.scss';
 
 function Game() {
-  // const [boardData, setBoardData] = React.useState(boardData);
-  // boardData
+  const [boardData, setBoardData] = React.useState(board);
   const [whiteCheksers, setWCheksers] = React.useState(wCheksers);
   const [blackCheksers, setBCheksers] = React.useState(bCheksers);
   const [chackers, setChackers] = React.useState();
 
   React.useEffect(() => {
+    if (whiteCheksers !== wCheksers || blackCheksers !== bCheksers) {
+      setBoardData(newBoard);
+    }
+
     boardData.map((row, rowIdx) => {
       row.map((cell, cellIdx) => {
         blackCheksers.map((item) => {
           if (cell.x === item.x && cell.y === item.y) {
-            boardData[rowIdx][cellIdx] = cell;
-            boardData[rowIdx][cellIdx].item = item;
+            board[rowIdx][cellIdx] = cell;
+            board[rowIdx][cellIdx].item = item;
           }
         });
         whiteCheksers.map((item) => {
           if (cell.x === item.x && cell.y === item.y) {
-            boardData[rowIdx][cellIdx] = cell;
-            boardData[rowIdx][cellIdx].item = item;
+            board[rowIdx][cellIdx] = cell;
+            board[rowIdx][cellIdx].item = item;
           }
         });
       });
     });
-  }, []);
+  }, [whiteCheksers, blackCheksers]);
 
   return (
     <Layout>
