@@ -2,7 +2,12 @@
 /* eslint-disable array-callback-return */
 import React from 'react';
 import { alfabeth, board, numbers } from '../configs';
-import { BlackChecker, WhiteChecker } from '../assets/png';
+import {
+  BlackChecker,
+  BlackQuin,
+  WhiteChecker,
+  WhiteQuin,
+} from '../assets/png';
 
 function Board({
   boardData,
@@ -74,7 +79,15 @@ function Board({
                     place.y + 2 === chackers.y
                   ) {
                     // ////////////////////////////////////////////
-                    if (board[rowIdx + 1][cellIdx + 1].item) {
+                    if (boardData[rowIdx + 1][cellIdx + 1].item) {
+                      // console.log(
+                      //   '--->',
+                      //   boardData[rowIdx + 2][cellIdx + 2].item
+                      // );
+                      console.log(
+                        '---> в лево',
+                        boardData[rowIdx + 2][cellIdx + 2].item
+                      );
                       setwCollection([
                         ...wCollection,
                         boardData[rowIdx + 1][cellIdx + 1].item,
@@ -93,7 +106,15 @@ function Board({
                       chackerObj.id = oldchacker.id;
                       chackerObj.group = oldchacker.group;
                       newWhiteCheksers.push(chackerObj);
-                    } else if (board[rowIdx + 1][cellIdx - 1].item) {
+                    } else if (boardData[rowIdx + 1][cellIdx - 1].item) {
+                      // console.log(
+                      //   '--->',
+                      //   boardData[rowIdx + 2][cellIdx - 2].item
+                      // );
+                      console.log(
+                        '---> в право',
+                        boardData[rowIdx + 2][cellIdx - 2].item
+                      );
                       setwCollection([
                         ...wCollection,
                         boardData[rowIdx + 1][cellIdx - 1].item,
@@ -156,10 +177,25 @@ function Board({
                     chackerObj = oldchacker;
                     newWhiteCheksers.push(chackerObj);
                   }
-                  // !
+                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 } else {
+                  setwCollection([
+                    ...wCollection,
+                    boardData[rowIdx + 1][cellIdx + 1].item ||
+                      boardData[rowIdx + 1][cellIdx - 1].item,
+                  ]);
+
+                  let array = blackCheksers;
+                  let indexa = array.indexOf(
+                    boardData[rowIdx + 1][cellIdx + 1].item ||
+                      boardData[rowIdx + 1][cellIdx - 1].item
+                  );
+
+                  delete array[indexa];
+
                   chackerObj.x = place.x;
                   chackerObj.y = place.y;
+                  chackerObj.q = oldchacker.q;
                   chackerObj.id = oldchacker.id;
                   chackerObj.group = oldchacker.group;
 
@@ -421,7 +457,12 @@ function Board({
                             chackers === chekser ? 'active' : ''
                           } white_chekser`}
                         >
-                          <img src={BlackChecker} alt='CH' />
+                          {chekser.q === true ? (
+                            // <img src={BlackQuin} alt='CH' />
+                            <img src={BlackQuin} alt='CH' />
+                          ) : (
+                            <img src={BlackChecker} alt='CH' />
+                          )}
                         </button>
                       );
                     }
@@ -440,7 +481,11 @@ function Board({
                           } black_chekser`}
                         >
                           {chekser.quin && 'W'}
-                          <img src={WhiteChecker} alt='CH' />
+                          {chekser.q === true ? (
+                            <img src={WhiteQuin} alt='CH' />
+                          ) : (
+                            <img src={WhiteChecker} alt='CH' />
+                          )}
                         </button>
                       );
                     }

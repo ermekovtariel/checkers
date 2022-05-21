@@ -1,7 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
-import { BlackChecker, WhiteChecker } from '../assets/png';
+import {
+  BlackChecker,
+  BlackQuin,
+  WhiteQuin,
+  WhiteChecker,
+} from '../assets/png';
 import { Board } from '../components';
 import { bCheksers, board, newBoard, wCheksers } from '../configs';
 import { Layout } from '../Layout';
@@ -69,7 +74,11 @@ function Game() {
                 chackers === chekser ? 'active' : ''
               } black_chekser`}
             >
-              <img src={WhiteChecker} alt='CH' />
+              {chekser.q === true ? (
+                <img src={BlackQuin} alt='CH' />
+              ) : (
+                <img src={BlackChecker} alt='CH' />
+              )}
             </button>
           );
         })}
@@ -103,7 +112,11 @@ function Game() {
                 chackers === chekser ? 'active' : ''
               } black_chekser`}
             >
-              <img src={WhiteChecker} alt='CH' />
+              {chekser.q === true ? (
+                <img src={WhiteQuin} alt='CH' />
+              ) : (
+                <img src={WhiteChecker} alt='CH' />
+              )}
             </button>
           );
         })}
