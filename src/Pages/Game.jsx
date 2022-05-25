@@ -20,6 +20,7 @@ function Game() {
   const [chackers, setChackers] = useState();
   const [wCollection, setwCollection] = useState([]);
   const [bCollection, setbCollection] = useState([]);
+  const [whitesTurn, setWhitesTurn] = useState(true);
 
   useEffect(() => {
     newBoard.map((row) => {
@@ -37,6 +38,10 @@ function Game() {
             board[rowIdx][cellIdx] = cell;
             board[rowIdx][cellIdx].item = item;
           }
+          if (wCollection.id === item.id) {
+            board[rowIdx][cellIdx] = cell;
+            board[rowIdx][cellIdx].item = item;
+          }
         });
         whiteCheksers.map((item) => {
           if (cell.x === item.x && cell.y === item.y) {
@@ -46,7 +51,7 @@ function Game() {
         });
       });
     });
-  }, [whiteCheksers, blackCheksers, boardData]);
+  }, [whiteCheksers, blackCheksers, wCollection, boardData]);
 
   useEffect(() => {
     if (whiteCheksers !== wCheksers || blackCheksers !== bCheksers) {
@@ -54,12 +59,12 @@ function Game() {
     }
   }, [whiteCheksers, blackCheksers]);
 
-  console.log('wCollection', wCollection);
-  console.log('bCollection', bCollection);
+  // console.log('wCollection', wCollection);
+  // console.log('bCollection', bCollection);
   // console.log('blackCheksers', blackCheksers);
 
   return (
-    <Layout>
+    <Layout whitesTurn={whitesTurn}>
       <div className='game_place points'>
         <h3>BLACK</h3>
         {bCollection.map((chekser) => {
@@ -68,7 +73,6 @@ function Game() {
               key={`${chekser.x}_${chekser.y}`}
               onClick={() => {
                 setChackers(chekser);
-                console.log(chekser);
               }}
               className={`${
                 chackers === chekser ? 'active' : ''
@@ -86,10 +90,12 @@ function Game() {
       <div className='game_place board'>
         <Board
           boardData={boardData}
+          whitesTurn={whitesTurn}
           whiteCheksers={whiteCheksers}
           blackCheksers={blackCheksers}
           setChackers={setChackers}
           chackers={chackers}
+          setWhitesTurn={setWhitesTurn}
           setWCheksers={setWCheksers}
           setBCheksers={setBCheksers}
           setwCollection={setwCollection}
@@ -105,8 +111,8 @@ function Game() {
             <button
               key={`${chekser.x}_${chekser.y}`}
               onClick={() => {
-                setChackers(chekser);
                 console.log(chekser);
+                setChackers(chekser);
               }}
               className={`${
                 chackers === chekser ? 'active' : ''

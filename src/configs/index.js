@@ -636,6 +636,7 @@ export const wCheksers = [
   { group: 'w', q: true, id: 11, x: 5, y: 3 },
   { group: 'w', q: false, id: 12, x: 7, y: 3 },
 ];
+
 export const bCheksers = [
   { group: 'b', q: false, id: 13, x: 8, y: 8 },
   { group: 'b', q: false, id: 14, x: 6, y: 8 },
@@ -648,7 +649,7 @@ export const bCheksers = [
   { group: 'b', q: false, id: 20, x: 1, y: 7 },
   //
   { group: 'b', q: false, id: 21, x: 8, y: 6 },
-  { group: 'b', q: false, id: 22, x: 6, y: 6 },
+  { group: 'b', q: true, id: 22, x: 6, y: 6 },
   { group: 'b', q: true, id: 23, x: 4, y: 6 },
   { group: 'b', q: false, id: 24, x: 2, y: 6 },
 ];
